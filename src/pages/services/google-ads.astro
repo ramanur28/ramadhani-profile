@@ -1,0 +1,285 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import FaqAccordion from '@/components/islands/FaqAccordion.tsx';
+import QuickAnswer from '@/components/common/QuickAnswer.astro';
+import type { ServiceSchemaData, FAQItem, BreadcrumbItem } from '@/types/schema';
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { name: 'Services', url: '/services/google-ads' },
+  { name: 'Google Ads Optimization', url: '/services/google-ads' },
+];
+
+const serviceData: ServiceSchemaData = {
+  name: 'Google Ads High-ROI Optimization',
+  serviceType: 'PayPerClickAdvertising',
+  description: 'High-intent Google Ads management, smart bidding optimization, server-side conversion tracking, and landing page CRO to maximize acquisition ROAS.',
+  url: 'https://ramadhani.dev/services/google-ads',
+  areaServed: 'Global',
+  offers: {
+    price: 'Starting at $2,800/month or $3,800 standalone account audit',
+    priceCurrency: 'USD',
+  },
+};
+
+const faqItems: FAQItem[] = [
+  {
+    question: 'How much does Google Ads management and optimization cost?',
+    answer: 'A comprehensive standalone Google Ads Account & Tracking Audit starts at $3,800. Monthly management retainers range from $2,800 to $6,500 per month (or a transparent hybrid flat fee + 3-5% ad spend tier for budgets above $50k/mo). Clients retain 100% direct ownership of their ad accounts and billing.',
+  },
+  {
+    question: 'How do you prevent wasted ad spend on broad-match queries?',
+    answer: 'We deploy strict Single-Themed Ad Groups (STAGs) using phrase and exact match commercial intents, maintain daily negative keyword hygiene lists, and separate Brand, Generic, and Competitor search terms into isolated budget tiers.',
+  },
+  {
+    question: 'What is server-side conversion tracking and why is it necessary?',
+    answer: 'Browser privacy protections (Safari ITP, ad-blockers) block up to 28% of standard client-side conversion pixels. Server-side tracking (via Google Tag Manager and Enhanced Conversions API) transmits conversion data directly from your server, feeding accurate value signals to Smart Bidding algorithms.',
+  },
+  {
+    question: 'What minimum ad spend do you require to take on a client?',
+    answer: 'We typically work with companies spending between $5,000 and $100,000 per month on Google Ads. Below $5,000/mo, machine learning algorithms lack sufficient conversion density to optimize Smart Bidding models effectively.',
+  },
+  {
+    question: 'How quickly can we expect to see an improvement in CPA and ROAS?',
+    answer: 'Negative keyword pruning and waste elimination produce immediate CPA reductions within the first 14 days. Re-training Smart Bidding algorithms with server-side conversion data typically achieves optimal target ROAS scaling within 30 to 60 days.',
+  },
+];
+---
+
+<PageLayout
+  title="Google Ads High-ROI Optimization | The Ramadhani"
+  description="Maximize revenue and ROAS with high-intent Google Ads campaign architecture, server-side conversion tracking, and landing page CRO."
+  headline="Google Ads High-ROI Optimization."
+  subheadline="Eliminate wasted spend on low-intent search terms. Scale your paid acquisition with exact intent targeting and value bidding."
+  badge="Service /03"
+  breadcrumbs={breadcrumbs}
+  service={serviceData}
+  faq={faqItems}
+  type="service"
+>
+  <div class="space-y-16">
+    
+    <!-- 1. 40-60 Word Plain-Language Answer Block (GEO Grounding) -->
+    <QuickAnswer
+      answer="Google Ads Optimization is the disciplined management of paid search campaigns, server-side conversion telemetry, and post-click landing pages. It eliminates wasted spend on low-intent keywords, trains Smart Bidding algorithms on high-value offline conversions, and maximizes return on ad spend (ROAS) for technology companies."
+    />
+
+    <!-- 2. Who It's For & What Problem It Solves -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="minimal-card p-8">
+        <span class="font-mono text-xs font-semibold text-brand-accent uppercase tracking-wider block mb-2">
+          Target ICP
+        </span>
+        <h2 class="font-display text-xl font-bold text-brand-text mb-4">
+          Who This Service Is For
+        </h2>
+        <ul class="space-y-2.5 text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>B2B SaaS &amp; Scaleups:</strong> Companies spending $5,000–$100,000/month looking to lower customer acquisition costs (CAC).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>High-Ticket Lead Generation:</strong> Brands where single closed deals represent $10k+ in contract value.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Frustrated Advertisers:</strong> Teams dealing with agency fee markups, poor communication, or declining ROAS.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="minimal-card p-8">
+        <span class="font-mono text-xs font-semibold text-brand-accent uppercase tracking-wider block mb-2">
+          Root Problems
+        </span>
+        <h2 class="font-display text-xl font-bold text-brand-text mb-4">
+          What Problems This Solves
+        </h2>
+        <ul class="space-y-2.5 text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Wasted Broad-Match Spend:</strong> Up to 40% of budget leaking into irrelevant informational search terms.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Broken Conversion Telemetry:</strong> Ad blockers preventing Google Smart Bidding from identifying high-value leads.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Low Post-Click Conversion:</strong> High-cost clicks landing on generic, slow, or poorly structured homepage designs.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. What's Included: Concrete Deliverables -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Execution &bull; Deliverables
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-6">
+        What Is Included (Concrete Deliverables)
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">01. Single-Themed Ad Group (STAG) Architecture</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Restructuring search campaigns into hyper-relevant ad groups with customized Responsive Search Ads (RSAs) for 9/10 Quality Scores.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">02. Server-Side GTM &amp; Enhanced Conversions</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Direct API configuration sending first-party hashed conversion data, bypassing ad-blockers and restoring attribution integrity.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">03. Master Negative Keyword Hygiene</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Daily search term audits, account-level exclusion lists, and competitor query containment to eliminate wasteful clicks.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">04. Landing Page Conversion Rate Optimization</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Sub-second page speed engineering, high-intent headline matching, and streamlined form architecture to maximize conversion rates.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How It Works (Process & Timeline) -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Roadmap &bull; Timeline
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-6">
+        How It Works (60-Day Scaling Framework)
+      </h2>
+
+      <div class="space-y-6">
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W1
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 1–2: Spend Audit &amp; Telemetry Repair</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Prune immediate negative keyword waste, deploy server-side GTM tracking, and verify Enhanced Conversion API signals.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W3
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 3–4: Campaign Re-Architecture &amp; Ad Copy Overhaul</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Launch Single-Themed Ad Groups (STAGs), configure ad extensions, and align landing page message matching.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W5
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 5–8: Value-Based Smart Bidding &amp; Scale</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Switch algorithms to Target CPA / Target ROAS using verified conversion data, scaling budgets into top-converting intents.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Proof: Concrete Sourced Results -->
+    <section class="rounded-2xl border border-brand-accent/30 bg-brand-surface p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Verified Case Study
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-4">
+        Fintech Platform: 5.2x ROAS &amp; -42% CPA Reduction
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-text">5.2x</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">ROAS (from 1.8x)</div>
+        </div>
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-text">-42%</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">Cost Per Acquisition</div>
+        </div>
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-accent">+185%</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">Qualified Pipeline Volume</div>
+        </div>
+      </div>
+      <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+        By eliminating $45,000/mo in broad-match search term waste, implementing server-side GTM with Enhanced Conversions, and restructuring search queries into exact Single-Themed Ad Groups, qualified pipeline grew by +185% without increasing total monthly ad spend.
+      </p>
+    </section>
+
+    <!-- 6. Transparent Pricing Approach -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Pricing &bull; Transparency
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-4">
+        Transparent Pricing Model
+      </h2>
+      <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mb-6">
+        All engagements feature clear flat retainers with zero hidden markups. You retain direct ownership and billing on your Google Ads account:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-6">
+          <span class="font-mono text-xs font-semibold text-brand-accent block mb-1">One-Time Project</span>
+          <div class="font-mono text-2xl font-bold text-brand-text">$3,800</div>
+          <div class="text-xs font-medium text-brand-text-muted mt-1 mb-4">Google Ads Account &amp; Tracking Audit</div>
+          <p class="text-xs text-brand-text-muted leading-relaxed border-t border-brand-border pt-4">
+            Includes 90-day search term waste analysis, conversion tracking verification, Quality Score diagnostics, and campaign reconstruction plan.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-accent/40 bg-brand-surface p-6 shadow-sm">
+          <span class="font-mono text-xs font-semibold text-brand-accent block mb-1">Ongoing Advisory &amp; Management</span>
+          <div class="font-mono text-2xl font-bold text-brand-text">$2,800 – $6,500<span class="text-xs font-normal text-brand-text-muted">/mo</span></div>
+          <div class="text-xs font-medium text-brand-text-muted mt-1 mb-4">Full PPC Management Retainer</div>
+          <p class="text-xs text-brand-text-muted leading-relaxed border-t border-brand-border pt-4">
+            Includes daily negative keyword pruning, Smart Bidding management, server-side tracking maintenance, and bi-weekly strategic reporting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Short FAQ (3-5 Questions) -->
+    <section>
+      <FaqAccordion client:visible items={faqItems} title="Google Ads Optimization FAQs" />
+    </section>
+
+    <!-- 8. Primary CTA -->
+    <section class="minimal-card p-8 sm:p-10 text-center">
+      <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-text">
+        Ready to eliminate wasted ad spend and scale ROAS?
+      </h2>
+      <p class="mt-3 text-xs sm:text-sm text-brand-text-muted max-w-lg mx-auto">
+        Schedule a PPC diagnostic to review search term waste, conversion tracking health, and immediate Quality Score opportunities.
+      </p>
+      <div class="mt-6">
+        <a href="/contact" class="btn-primary">
+          <span>Request PPC Audit</span>
+          <span class="ml-1.5">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>

@@ -1,0 +1,285 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import FaqAccordion from '@/components/islands/FaqAccordion.tsx';
+import QuickAnswer from '@/components/common/QuickAnswer.astro';
+import type { ServiceSchemaData, FAQItem, BreadcrumbItem } from '@/types/schema';
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { name: 'Services', url: '/services/seo' },
+  { name: 'Technical & Organic SEO', url: '/services/seo' },
+];
+
+const serviceData: ServiceSchemaData = {
+  name: 'Technical & Organic SEO Engineering',
+  serviceType: 'SearchEngineOptimization',
+  description: 'Technical SEO engineering, sub-second Core Web Vitals optimization, and semantic entity architecture for technology brands looking to outrank competitors in Google search.',
+  url: 'https://ramadhani.dev/services/seo',
+  areaServed: 'Global',
+  offers: {
+    price: 'Starting at $3,500/month or $4,800 standalone audit',
+    priceCurrency: 'USD',
+  },
+};
+
+const faqItems: FAQItem[] = [
+  {
+    question: 'How much does Technical SEO consulting cost?',
+    answer: 'Comprehensive standalone Technical SEO Code Audits start at $4,800 as a one-time engagement. Ongoing full-funnel organic search engineering retainers range between $3,500 and $7,500 per month depending on site complexity, codebase size, and velocity of content publishing.',
+  },
+  {
+    question: 'How do you guarantee Core Web Vitals compliance (LCP < 1.8s, CLS 0.0)?',
+    answer: 'We audit and refactor the critical rendering path directly: eliminating render-blocking JavaScript, optimizing modern image formats (AVIF/WebP with explicit dimension ratios), preloading critical hero assets, and reducing Time to First Byte (TTFB) to sub-200ms through edge caching.',
+  },
+  {
+    question: 'What is the difference between standard agency SEO and Technical SEO Engineering?',
+    answer: 'Standard agency SEO focuses on generic keyword research and manual backlink outreach. Technical SEO Engineering treats your website as a high-performance software system: fixing crawl waste in server logs, injecting interconnected Schema.org JSON-LD graphs, and submitting direct Git pull requests for frontend performance.',
+  },
+  {
+    question: 'How quickly will our website see organic ranking improvements?',
+    answer: 'Technical fixes (such as resolving canonicalization errors, indexing bottlenecks, and Core Web Vitals regressions) typically yield positive indexing responses from Googlebot within 14 to 28 days. Competitive keyword authority climbing compounds over a 3 to 6-month timeline.',
+  },
+  {
+    question: 'Do you write the code changes or just provide PDF reports?',
+    answer: 'We provide direct implementation: complete JSON-LD schema blocks, robots directives, image optimization configurations, and code pull requests for your engineering team to review and deploy.',
+  },
+];
+---
+
+<PageLayout
+  title="Technical & Organic SEO Engineering | The Ramadhani"
+  description="Technical SEO engineering, Core Web Vitals optimization, and semantic knowledge graphs that secure #1 Google rankings for technology companies."
+  headline="Technical & Organic SEO Engineering."
+  subheadline="Engineered for sub-second page performance, zero crawl waste, and sustainable #1 organic search rankings."
+  badge="Service /01"
+  breadcrumbs={breadcrumbs}
+  service={serviceData}
+  faq={faqItems}
+  type="service"
+>
+  <div class="space-y-16">
+    
+    <!-- 1. 40-60 Word Plain-Language Answer Block (GEO Grounding) -->
+    <QuickAnswer
+      answer="Technical SEO Engineering is the code-level optimization of website architecture, crawl budgets, Core Web Vitals, and semantic Schema.org entity graphs. It ensures search engine crawlers like Googlebot can index, understand, and rank high-value commercial pages without performance bottlenecks, leading to sustainable top-3 organic search rankings."
+    />
+
+    <!-- 2. Who It's For & What Problem It Solves -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="minimal-card p-8">
+        <span class="font-mono text-xs font-semibold text-brand-accent uppercase tracking-wider block mb-2">
+          Target ICP
+        </span>
+        <h2 class="font-display text-xl font-bold text-brand-text mb-4">
+          Who This Service Is For
+        </h2>
+        <ul class="space-y-2.5 text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>B2B SaaS &amp; Tech Platforms:</strong> Companies with complex JavaScript single-page apps or multi-thousand page documentation hubs.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>High-Growth Scaleups:</strong> Teams whose organic traffic has plateaued despite regular content publishing.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Engineering-Led Companies:</strong> Leaders who require concrete pull requests and data over agency marketing fluff.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="minimal-card p-8">
+        <span class="font-mono text-xs font-semibold text-brand-accent uppercase tracking-wider block mb-2">
+          Root Problems
+        </span>
+        <h2 class="font-display text-xl font-bold text-brand-text mb-4">
+          What Problems This Solves
+        </h2>
+        <ul class="space-y-2.5 text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Failing Core Web Vitals:</strong> Poor mobile LCP (&gt; 2.5s) and layout shifts (CLS &gt; 0.1) causing algorithmic ranking suppression.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Indexation &amp; Crawl Waste:</strong> Googlebot wasting crawl budget on faceted navigation or duplicate URL parameters.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-accent font-bold">&bull;</span>
+            <span><strong>Fragmented Entity Signals:</strong> Missing or invalid JSON-LD schema preventing rich snippets and knowledge panel integration.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. What's Included: Concrete Deliverables -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Execution &bull; Deliverables
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-6">
+        What Is Included (Concrete Deliverables)
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">01. Code-Level Core Web Vitals Refactor</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Direct remediation of render-blocking JavaScript, asset preloading, image modernizations, and CSS refactoring to achieve 95+ mobile PageSpeed scores.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">02. Interconnected Schema.org Graph</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Custom `@graph` JSON-LD connecting Organization, Person (E-E-A-T author), Service, Article, and Product entities.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">03. Crawl Efficiency &amp; Index Cleanup</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Server log analysis, canonicalization audits, redirect loop pruning, and XML sitemap hierarchy optimization.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-5">
+          <span class="font-mono text-xs font-bold text-brand-accent block mb-1">04. Pillar Hub &amp; Topical Cluster Mapping</span>
+          <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+            Comprehensive semantic content hierarchy designed to systematically build topical authority over high-DR competitors.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How It Works (Process & Timeline) -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Roadmap &bull; Timeline
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-6">
+        How It Works (90-Day Implementation Process)
+      </h2>
+
+      <div class="space-y-6">
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W1
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 1–2: Deep Technical &amp; Log Audit</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Full crawl simulation, Core Web Vitals telemetry capture, server log audit, and priority backlog creation.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W3
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 3–5: Code-Level Remediation &amp; Schema Deployment</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Execution of frontend performance pull requests, JSON-LD knowledge graph injection, and robots directive restructuring.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-accent font-mono text-xs font-bold text-white">
+            W6
+          </span>
+          <div>
+            <h3 class="text-sm font-bold text-brand-text">Weeks 6–12: Topical Cluster Expansion &amp; Telemetry</h3>
+            <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mt-1">
+              Deployment of semantic pillar architecture, internal link graph optimization, and weekly indexation monitoring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Proof: Concrete Sourced Results -->
+    <section class="rounded-2xl border border-brand-accent/30 bg-brand-surface p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Verified Case Study
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-4">
+        HealthTech Authority: +140 Top-3 Rankings in 90 Days
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-text">0.8s</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">LCP (from 4.2s)</div>
+        </div>
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-text">+140</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">Top-3 Google Keywords</div>
+        </div>
+        <div class="rounded-xl bg-brand-card p-4 border border-brand-border">
+          <div class="font-mono text-3xl font-bold text-brand-accent">+62%</div>
+          <div class="text-xs text-brand-text-muted font-medium mt-1">Organic Inbound Signups</div>
+        </div>
+      </div>
+      <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed">
+        By resolving critical render-blocking third-party scripts, rewriting canonical configurations, and structuring 45 medical authority guides with connected Physician and MedicalWebPage schema, organic impressions grew by +240% year-over-year.
+      </p>
+    </section>
+
+    <!-- 6. Transparent Pricing Approach -->
+    <section class="minimal-card p-8 sm:p-10">
+      <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+        Pricing &bull; Transparency
+      </div>
+      <h2 class="font-display text-2xl font-bold text-brand-text mb-4">
+        Transparent Pricing Model
+      </h2>
+      <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mb-6">
+        In accordance with 2026 E-E-A-T and buyer clarity standards, all technical engagements operate with transparent scopes and zero hidden fees:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-brand-border bg-brand-surface p-6">
+          <span class="font-mono text-xs font-semibold text-brand-accent block mb-1">One-Time Project</span>
+          <div class="font-mono text-2xl font-bold text-brand-text">$4,800</div>
+          <div class="text-xs font-medium text-brand-text-muted mt-1 mb-4">Comprehensive Technical Code &amp; Schema Audit</div>
+          <p class="text-xs text-brand-text-muted leading-relaxed border-t border-brand-border pt-4">
+            Includes full crawl analysis, Core Web Vitals remediation plan, custom JSON-LD schema graph, and developer handoff walkthrough.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-brand-accent/40 bg-brand-surface p-6 shadow-sm">
+          <span class="font-mono text-xs font-semibold text-brand-accent block mb-1">Ongoing Advisory &amp; Execution</span>
+          <div class="font-mono text-2xl font-bold text-brand-text">$3,500 – $7,500<span class="text-xs font-normal text-brand-text-muted">/mo</span></div>
+          <div class="text-xs font-medium text-brand-text-muted mt-1 mb-4">Full Technical SEO Retainer</div>
+          <p class="text-xs text-brand-text-muted leading-relaxed border-t border-brand-border pt-4">
+            Includes continuous codebase pull requests, topical cluster architecture, weekly Googlebot log monitoring, and direct Slack consulting.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Short FAQ (3-5 Questions) -->
+    <section>
+      <FaqAccordion client:visible items={faqItems} title="Technical SEO Engineering FAQs" />
+    </section>
+
+    <!-- 8. Primary CTA -->
+    <section class="minimal-card p-8 sm:p-10 text-center">
+      <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-brand-text">
+        Ready to engineer your organic search dominance?
+      </h2>
+      <p class="mt-3 text-xs sm:text-sm text-brand-text-muted max-w-lg mx-auto">
+        Schedule a preliminary diagnostic review to uncover crawl waste, Core Web Vitals regressions, and high-impact keyword opportunities.
+      </p>
+      <div class="mt-6">
+        <a href="/contact" class="btn-primary">
+          <span>Schedule Technical Audit</span>
+          <span class="ml-1.5">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>

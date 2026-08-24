@@ -1,0 +1,78 @@
+services:
+  # Production Caddy Static Web Server with Automatic TLS & Brotli/Gzip Compression
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ramadhani-web-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      - SITE_DOMAIN=${SITE_DOMAIN:-localhost}
+      - SITE_URL=${SITE_URL:-https://ramadhani.dev}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - internal-net
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      - umami
+
+  # Self-Hosted Umami Analytics Application
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: ramadhani-umami-app
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://${UMAMI_DB_USER:-umami}:${UMAMI_DB_PASSWORD:-umami_secure_pass}@umami-db:5432/${UMAMI_DB_NAME:-umami}
+      - DATABASE_TYPE=postgresql
+      - APP_SECRET=${UMAMI_APP_SECRET:-change_this_secret_in_prod_env_32chars}
+    networks:
+      - internal-net
+    depends_on:
+      umami-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/heartbeat"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  # Lightweight PostgreSQL Database for Umami Analytics
+  umami-db:
+    image: postgres:16-alpine
+    container_name: ramadhani-umami-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${UMAMI_DB_NAME:-umami}
+      - POSTGRES_USER=${UMAMI_DB_USER:-umami}
+      - POSTGRES_PASSWORD=${UMAMI_DB_PASSWORD:-umami_secure_pass}
+    volumes:
+      - umami_db_data:/var/lib/postgresql/data
+    networks:
+      - internal-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${UMAMI_DB_USER:-umami} -d ${UMAMI_DB_NAME:-umami}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  internal-net:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+  umami_db_data:

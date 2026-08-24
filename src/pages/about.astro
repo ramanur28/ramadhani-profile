@@ -1,0 +1,206 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { PersonSchemaData, BreadcrumbItem } from '@/types/schema';
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { name: 'About', url: '/about' },
+];
+
+const personData: PersonSchemaData = {
+  name: 'Ramadhani',
+  jobTitle: 'Lead Technical SEO, GEO & Paid Search Specialist',
+  worksFor: 'Ramadhani Growth Agency',
+  url: 'https://ramadhani.dev/about',
+  image: 'https://ramadhani.dev/images/ramadhani-portrait.svg',
+  description: 'Senior digital marketing specialist with 8+ years experience scaling SaaS revenue through Technical SEO, Generative Engine Optimization (GEO), and high-ROI Google Ads campaigns.',
+  sameAs: [
+    'https://www.linkedin.com/in/ramadhani-marketing',
+    'https://twitter.com/ramadhani_seo',
+    'https://github.com/ramadhani',
+  ],
+  knowsAbout: [
+    'Technical Search Engine Optimization (SEO)',
+    'Generative Engine Optimization (GEO)',
+    'AI Overviews & LLM Answer Citation',
+    'Google Ads Server-Side Conversion Measurement',
+    'Core Web Vitals Engineering',
+    'Schema.org Knowledge Graph Modeling',
+  ],
+  hasCredential: [
+    'Google Ads Search & Measurement Certified Professional',
+    'Advanced Technical SEO & Schema Authority',
+    'Generative Search Optimization Specialist',
+  ],
+};
+---
+
+<PageLayout
+  title="About The Ramadhani | SEO, GEO & Google Ads Specialist"
+  description="Background, technical methodology, and verified entity credentials of Ramadhani — Senior SEO, GEO, and Google Ads specialist for technology brands."
+  headline="Direct, data-led search architecture for high-growth technology brands."
+  subheadline="I bridge the gap between traditional search algorithms, conversational AI answer models, and high-efficiency paid acquisition."
+  badge="Entity Profile &bull; E-E-A-T"
+  breadcrumbs={breadcrumbs}
+  person={personData}
+  type="person"
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+    <!-- Left: Entity Profile Card -->
+    <div class="lg:col-span-4 space-y-6">
+      <div class="minimal-card p-6 sm:p-7">
+        <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-accent/15 border border-brand-accent/30 font-mono text-2xl font-bold text-brand-accent">
+          R
+        </div>
+
+        <div class="mt-5">
+          <h2 class="font-display text-xl font-bold text-brand-text">Ramadhani</h2>
+          <p class="text-xs text-brand-accent font-mono mt-0.5 font-semibold">
+            Technical SEO, GEO &amp; PPC Specialist
+          </p>
+        </div>
+
+        <div class="mt-6 border-t border-brand-border pt-5 space-y-3 text-xs text-brand-text-muted">
+          <div class="flex justify-between">
+            <span>Experience:</span>
+            <span class="font-semibold text-brand-text">8+ Years (Since 2018)</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Cumulative Ad Spend Managed:</span>
+            <span class="font-semibold text-brand-text">$14M+</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Pages Architected:</span>
+            <span class="font-semibold text-brand-text">50,000+</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Engagement Model:</span>
+            <span class="font-semibold text-brand-text">Direct Strategic Consulting</span>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-2">
+          <a href="/contact" class="btn-primary w-full text-xs py-2.5">
+            Schedule Strategic Audit
+          </a>
+        </div>
+      </div>
+
+      <!-- Verified External Profiles (sameAs) -->
+      <div class="minimal-card p-6 reveal-on-scroll reveal-delay-100">
+        <h3 class="font-mono text-xs font-semibold uppercase tracking-wider text-brand-text mb-3">
+          Verified Profiles (`sameAs`)
+        </h3>
+        <ul class="space-y-2.5 text-xs text-brand-text-muted">
+          <li>
+            <a href="https://www.linkedin.com/in/ramadhani-marketing" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between text-brand-text hover:text-brand-accent transition-colors font-medium">
+              <span>LinkedIn Profile</span>
+              <span class="text-brand-text-dim text-[11px] font-mono">&nearr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/ramadhani_seo" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between text-brand-text hover:text-brand-accent transition-colors font-medium">
+              <span>Twitter / X (@ramadhani_seo)</span>
+              <span class="text-brand-text-dim text-[11px] font-mono">&nearr;</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/ramadhani" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between text-brand-text hover:text-brand-accent transition-colors font-medium">
+              <span>GitHub Organization</span>
+              <span class="text-brand-text-dim text-[11px] font-mono">&nearr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Verified Credentials -->
+      <div class="minimal-card p-6 reveal-on-scroll reveal-delay-100">
+        <h3 class="font-mono text-xs font-semibold uppercase tracking-wider text-brand-text mb-3">
+          Certifications &amp; Guilds
+        </h3>
+        <ul class="space-y-2 text-xs text-brand-text-muted">
+          {personData.hasCredential?.map((cred) => (
+            <li class="flex items-start gap-2">
+              <span class="text-brand-accent font-mono font-bold">&bull;</span>
+              <span class="text-brand-text font-medium">{cred}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right: Concrete Origin Narrative & Positioning -->
+    <div class="lg:col-span-8 space-y-8">
+      
+      <!-- Concrete Origin Story (E-E-A-T Experience Pillar) -->
+      <section class="minimal-card p-8 sm:p-10">
+        <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+          Experience &bull; E-E-A-T
+        </div>
+        <h2 class="font-display text-2xl font-bold text-brand-text mb-6">
+          The Origin of Dual-Vector Search
+        </h2>
+        <div class="space-y-5 text-sm leading-relaxed text-brand-text-muted">
+          <p>
+            In my first year managing $1.2M in annual Google Ads spend for high-growth B2B SaaS companies, I discovered that client-side tracking scripts were misattributing nearly 25% of qualified enterprise pipeline due to ad blockers and browser privacy barriers.
+          </p>
+          <p>
+            Fixing the underlying telemetry—first through server-side Google Tag Manager, then through direct code-level Core Web Vitals optimization—unlocked more profitable organic and paid growth than any keyword trick or bidding hack ever could.
+          </p>
+          <p>
+            Over the last 8 years, I have architected technical SEO frameworks across 50,000+ indexable pages and managed $14M+ in cumulative ad budgets. When Google launched AI Overviews and conversational answer engines like Perplexity gained mainstream adoption, I expanded this methodology to include <strong>Generative Engine Optimization (GEO)</strong>—structuring content and entity graphs so language models cite client brands as their primary grounding sources.
+          </p>
+        </div>
+      </section>
+
+      <!-- Specificity: Who This Is NOT For / What I Do Not Do -->
+      <section class="minimal-card p-8 sm:p-10 border-l-4 border-l-brand-accent">
+        <div class="font-mono text-xs font-semibold text-brand-accent mb-2">
+          Strict Positioning &bull; Transparency
+        </div>
+        <h2 class="font-display text-2xl font-bold text-brand-text mb-4">
+          Who This Is NOT For (What I Do Not Do)
+        </h2>
+        <p class="text-xs sm:text-sm text-brand-text-muted leading-relaxed mb-6">
+          To maintain high execution rigor and direct consulting availability, I operate with clear engagement boundaries:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div class="rounded-xl border border-brand-border bg-brand-surface p-4">
+            <span class="font-mono font-bold text-red-600 dark:text-red-400 block mb-1">&times; What I Do NOT Do</span>
+            <ul class="space-y-1.5 text-brand-text-muted mt-2">
+              <li>&bull; Spammy link building or PBNs</li>
+              <li>&bull; Black-hat churn-and-burn sites</li>
+              <li>&bull; Generic social media management</li>
+              <li>&bull; Pre-PMF startups with zero search demand</li>
+            </ul>
+          </div>
+
+          <div class="rounded-xl border border-brand-border bg-brand-surface p-4">
+            <span class="font-mono font-bold text-brand-accent block mb-1">&check; Who This IS For</span>
+            <ul class="space-y-1.5 text-brand-text-muted mt-2">
+              <li>&bull; Funded B2B SaaS &amp; developer tools</li>
+              <li>&bull; Fintech &amp; HealthTech platforms</li>
+              <li>&bull; Mid-market firms spending $5k–$100k/mo</li>
+              <li>&bull; Teams requiring code-level technical SEO</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Knowledge Domains -->
+      <section class="minimal-card p-8 sm:p-10">
+        <h2 class="font-display text-xl font-bold text-brand-text mb-4">
+          Core Domains of Authority (`knowsAbout`)
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          {personData.knowsAbout?.map((topic) => (
+            <div class="rounded-lg border border-brand-border bg-brand-surface p-3.5 flex items-center gap-2.5">
+              <span class="h-1.5 w-1.5 rounded-full bg-brand-accent"></span>
+              <span class="font-semibold text-brand-text">{topic}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>
