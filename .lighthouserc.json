@@ -2,6 +2,16 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/about/index.html",
+        "http://localhost/services/seo/index.html",
+        "http://localhost/services/geo/index.html",
+        "http://localhost/work/index.html",
+        "http://localhost/articles/index.html",
+        "http://localhost/articles/generative-engine-optimization-guide/index.html",
+        "http://localhost/contact/index.html"
+      ],
       "numberOfRuns": 2,
       "settings": {
         "chromeFlags": "--no-sandbox --disable-dev-shm-usage --disable-gpu --headless"
