@@ -1,6 +1,7 @@
 services:
   # Production Caddy Static Web Server with Automatic TLS & Brotli/Gzip Compression
   web:
+    image: ${WEB_IMAGE:-ramadhani-web:latest}
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,6 +15,9 @@ services:
       - SITE_DOMAIN=${SITE_DOMAIN:-ramadhani.cloud}
       - SITE_URL=${SITE_URL:-https://ramadhani.cloud}
       - ACME_EMAIL=${ACME_EMAIL:-ramanur321@gmail.com}
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - caddy_data:/data
       - caddy_config:/config

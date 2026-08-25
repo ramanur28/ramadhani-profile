@@ -27,11 +27,14 @@ const {
   type = 'website',
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://theramadhani.dev';
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://ramadhani.cloud';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const ogImageURL = image.startsWith('http') ? image : new URL(image, siteUrl).toString();
 const siteName = 'The Ramadhani | SEO, GEO & Google Ads Specialist';
 const fullTitle = title.includes('The Ramadhani') ? title : `${title} | The Ramadhani`;
+
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '1caa2dcc-1a6e-4727-be26-0f3e6dc7c05b';
+const umamiHostUrl = import.meta.env.PUBLIC_UMAMI_HOST_URL || 'https://analytics.ramadhani.cloud';
 ---
 
 <!-- High Priority Charset & Viewport -->
@@ -46,6 +49,24 @@ const fullTitle = title.includes('The Ramadhani') ? title : `${title} | The Rama
 <meta name="author" content="The Ramadhani" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" content="#FAFAF8" />
+
+<!-- Responsive Preloads for Instant LCP: Mobile downloads ONLY 26KB WebP -->
+<link
+  rel="preload"
+  as="image"
+  href="/images/hero-poster-mobile.webp"
+  type="image/webp"
+  media="(max-width: 767px)"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  as="image"
+  href="/images/hero-poster.webp"
+  type="image/webp"
+  media="(min-width: 768px)"
+  fetchpriority="high"
+/>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={article ? 'article' : 'website'} />
@@ -81,16 +102,40 @@ const fullTitle = title.includes('The Ramadhani') ? title : `${title} | The Rama
 <!-- LLM Discovery Directive -->
 <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context & Summary" />
 
-<!-- Optimized Typography: Alex Brush (Script) + Great Vibes + Inter + Plus Jakarta Sans + Newsreader + JetBrains Mono -->
+<!-- High-Performance Google Fonts with Preconnect & Alex Brush Signature Script -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+/>
+<link
   rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
 />
 
 <!-- View Transitions API -->
 <ClientRouter />
+
+<!-- Umami Privacy-Focused Analytics & Heatmap Session Recorder -->
+{umamiWebsiteId && (
+  <>
+    <script
+      is:inline
+      defer
+      src={`${umamiHostUrl}/script.js`}
+      data-website-id={umamiWebsiteId}
+      data-auto-track="true"
+    ></script>
+    <script
+      is:inline
+      defer
+      src={`${umamiHostUrl}/recorder.js`}
+      data-website-id={umamiWebsiteId}
+    ></script>
+  </>
+)}
 
 <!-- Structured Data (JSON-LD) -->
 <JsonLd

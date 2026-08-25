@@ -79,25 +79,31 @@ const proofPoints = [
   description="Senior consultant engineering Technical SEO, Generative Engine Optimization (GEO), and High-ROI Google Ads campaigns for growth-driven technology brands."
   type="website"
 >
-  <!-- 1. Hero Section: Exact Viewport Height (100dvh - 4rem Navbar) with High-Opacity Glassmorphism -->
-  <section class="relative w-full h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)] max-h-[calc(100vh-4rem)] max-h-[calc(100dvh-4rem)] flex items-center justify-center border-b border-brand-border overflow-hidden px-4 sm:px-6 lg:px-8">
-    <!-- Direct Full Clarity Video Background -->
+  <!-- 1. Hero Section: Exact Proportional Viewport Height (100dvh - 4rem Navbar) -->
+  <section class="relative w-full h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)] min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex items-center justify-center border-b border-brand-border overflow-hidden px-4 sm:px-6 lg:px-8">
+    <!-- Zero-Overhead Hero Background: Static 26KB WebP on Mobile (Zero Video Fetch), Desktop Dynamic Video Stream -->
     <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
-      <video
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="auto"
-        class="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/hero-bg-video.mp4" type="video/mp4" />
-      </video>
+      <!-- High-Performance WebP Picture Element (Preloaded & Instant LCP) -->
+      <picture class="absolute inset-0 w-full h-full">
+        <source media="(max-width: 767px)" srcset="/images/hero-poster-mobile.webp" type="image/webp" />
+        <source media="(min-width: 768px)" srcset="/images/hero-poster.webp" type="image/webp" />
+        <img
+          src="/images/hero-poster-mobile.webp"
+          alt=""
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </picture>
+
+      <!-- Desktop-Only Video Mount (Strictly injected on desktop >= 768px so mobile NEVER downloads the video file) -->
+      <div id="desktop-hero-video-container" class="hidden md:block absolute inset-0 w-full h-full"></div>
     </div>
 
     <!-- Centered Proportional Hero Content Card with High-Opacity Frost -->
     <div class="relative z-10 mx-auto max-w-2xl lg:max-w-3xl w-full flex items-center justify-center">
-      <div class="w-full rounded-2xl bg-brand-bg/90 backdrop-blur-xl p-6 sm:p-8 lg:p-9 border border-brand-border/80 shadow-2xl">
+      <div class="w-full rounded-2xl bg-brand-bg/90 backdrop-blur-xl p-5 sm:p-7 lg:p-9 border border-brand-border/80 shadow-2xl">
         
         <!-- Category Badge -->
         <div class="animate-hero-entrance inline-flex items-center gap-1.5 rounded-full border border-brand-border bg-brand-surface px-2.5 py-0.5 font-mono text-[11px] font-semibold text-brand-text mb-4 shadow-2xs badge-shimmer">
@@ -376,4 +382,35 @@ const proofPoints = [
       </div>
     </div>
   </section>
+
+  <!-- Dynamic Desktop-Only Video Streaming Script (Ensures 0 Network Requests on Mobile Devices) -->
+  <script is:inline>
+    function initDesktopHeroVideo() {
+      if (window.innerWidth < 768) return;
+      const mount = document.getElementById('desktop-hero-video-container');
+      if (!mount || mount.querySelector('video')) return;
+
+      const video = document.createElement('video');
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.poster = '/images/hero-poster.webp';
+      video.className = 'w-full h-full object-cover';
+
+      const src = document.createElement('source');
+      src.src = '/videos/hero-bg-video.mp4';
+      src.type = 'video/mp4';
+      video.appendChild(src);
+      mount.appendChild(video);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDesktopHeroVideo);
+    } else {
+      initDesktopHeroVideo();
+    }
+    document.addEventListener('astro:page-load', initDesktopHeroVideo);
+  </script>
 </BaseLayout>

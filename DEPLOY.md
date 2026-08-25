@@ -1,19 +1,17 @@
 # Deployment & Operations Guide: Ramadhani Brand Platform
 
-This guide outlines how to run the site locally in development mode, deploy the production stack with automated TLS and self-hosted analytics on a single VPS, and configure automatic rebuilds when content is published via Decap CMS.
+This guide outlines how to build the production Docker image locally on your computer and deploy it to your remote production server (VPS at `/var/www/ramadhani`).
 
 ---
 
 ## 1. Local Development (Docker & Native)
 
-### Option A: Via Docker Compose (Recommended for clean isolation)
+### Option A: Via Docker Compose
 ```bash
-# Start Astro dev server and Decap CMS local proxy
 docker compose -f docker-compose.dev.yml up
 ```
 - **Astro Site**: [http://localhost:4321](http://localhost:4321)
 - **CMS Admin**: [http://localhost:4321/admin](http://localhost:4321/admin)
-- **Decap Local Backend Proxy**: [http://localhost:8081](http://localhost:8081)
 
 ### Option B: Native Node.js
 ```bash
@@ -23,77 +21,99 @@ npm run dev
 
 ---
 
-## 2. Production VPS Deployment
+## 2. Build Locally & Deploy to Production VPS
 
-The production architecture is fully containerized with **Caddy** (serving pre-compressed static assets, enforcing security headers, and automating Let's Encrypt / ZeroSSL TLS certificates) and **Umami Analytics** with its own PostgreSQL database.
+Building the Docker image locally saves CPU and RAM on your VPS and ensures zero build overhead in production.
 
-### Step 1: Clone Repository on VPS
+### Method A: Direct Transfer (No Registry Required - Recommended)
+
+#### Step 1: Build & Compress Image on Local Machine
+Run this in WSL or your local terminal:
 ```bash
-git clone https://github.com/your-username/ramadhani-personal-brand.git /var/www/ramadhani
+# 1. Build image for Linux VPS architecture (AMD64)
+docker build --platform linux/amd64 -t ramadhani-web:latest .
+
+# 2. Export and compress image to tar.gz
+docker save ramadhani-web:latest | gzip > ramadhani-web.tar.gz
+```
+
+#### Step 2: Transfer Image & Configs to VPS
+```bash
+# Transfer image archive to VPS
+scp ramadhani-web.tar.gz user@your-vps-ip:/var/www/ramadhani/
+
+# Transfer docker-compose.prod.yml & .env if updated
+scp docker-compose.prod.yml .env Caddyfile user@your-vps-ip:/var/www/ramadhani/
+```
+
+#### Step 3: Load & Run on Production VPS
+SSH into your VPS:
+```bash
+ssh user@your-vps-ip
+
+# Navigate to app directory
 cd /var/www/ramadhani
+
+# Load pre-built image into Docker
+docker load < ramadhani-web.tar.gz
+
+# Start or restart the stack (zero rebuild needed)
+docker compose -f docker-compose.prod.yml up -d
+
+# (Optional) Clean up the transferred archive
+rm ramadhani-web.tar.gz
 ```
 
-### Step 2: Configure Environment Variables
+---
+
+### Method B: Via Docker Hub or GitHub Container Registry (GHCR)
+
+#### Step 1: Build & Push on Local Machine
 ```bash
-cp .env.example .env
-nano .env
-```
-Update `SITE_DOMAIN`, `SITE_URL`, `UMAMI_DB_PASSWORD`, and `UMAMI_APP_SECRET`.
+# Login to Docker Hub or GHCR
+docker login
 
-### Step 3: Launch Production Stack
+# Build for Linux VPS architecture and push
+docker build --platform linux/amd64 -t yourdockerhub/ramadhani-web:latest .
+docker push yourdockerhub/ramadhani-web:latest
+```
+
+#### Step 2: Pull & Run on VPS
+On your VPS in `/var/www/ramadhani`:
+1. In `.env`, set `WEB_IMAGE=yourdockerhub/ramadhani-web:latest`
+2. Run:
 ```bash
-docker compose -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.prod.yml pull web
+docker compose -f docker-compose.prod.yml up -d
 ```
 
-### Step 4: Verify Deployment & Healthchecks
+---
+
+## 3. Server Firewall & DNS Checklist
+
+### DNS Records:
+- `A` Record: `@` &rarr; `<YOUR_VPS_PUBLIC_IP>` (`ramadhani.cloud`)
+- `CNAME` / `A` Record: `www` &rarr; `ramadhani.cloud`
+- `CNAME` / `A` Record: `analytics` &rarr; `ramadhani.cloud`
+
+### VPS Firewall Ports (UFW):
+```bash
+sudo ufw allow 80/tcp comment "HTTP (Caddy)"
+sudo ufw allow 443/tcp comment "HTTPS (Caddy)"
+sudo ufw allow 443/udp comment "HTTP/3 QUIC (Caddy)"
+sudo ufw allow 22/tcp comment "SSH"
+sudo ufw reload
+```
+
+---
+
+## 4. Verification & Health Monitoring
+
+Check running containers:
 ```bash
 docker compose -f docker-compose.prod.yml ps
-docker compose -f docker-compose.prod.yml logs web
+docker compose -f docker-compose.prod.yml logs web --tail 50
 ```
 
----
-
-## 3. Automated Rebuild on CMS Article Publication
-
-When an editor publishes or updates an MDX article via Decap CMS at `/admin`, Decap commits the new MDX file to the `main` branch of your GitHub repository.
-
-To trigger an automatic rebuild without needing a complex CI pipeline, set up a simple lightweight webhook handler on your VPS (e.g., using `adnanh/webhook` or a 15-line Node.js script):
-
-### Webhook Deploy Script (`/var/www/ramadhani/deploy.sh`)
-```bash
-#!/bin/bash
-set -e
-cd /var/www/ramadhani
-git pull origin main
-docker compose -f docker-compose.prod.yml build web
-docker compose -f docker-compose.prod.yml up -d --no-deps web
-echo "Production build successfully refreshed at $(date)"
-```
-Make the script executable:
-```bash
-chmod +x /var/www/ramadhani/deploy.sh
-```
-
-### GitHub Webhook Setup
-1. In your GitHub repository, go to **Settings > Webhooks > Add webhook**.
-2. **Payload URL**: `https://ramadhani.cloud/api/webhook-deploy` (or your webhook server endpoint).
-3. **Content type**: `application/json`.
-4. **Secret**: Value of `REBUILD_WEBHOOK_SECRET` in your `.env`.
-5. **Events**: "Just the push event" on `main`.
-
----
-
-## 4. Performance & Core Web Vitals Monitoring
-
-- Run local Lighthouse audits:
-  ```bash
-  npm run build
-  npx lhci autorun
-  ```
-- Target Budgets:
-  - **Performance**: ≥ 95
-  - **SEO**: 100
-  - **Accessibility**: ≥ 95
-  - **Best Practices**: ≥ 95
-  - **LCP**: < 2.0s
-  - **CLS**: < 0.1
+- **Website**: `https://ramadhani.cloud`
+- **Analytics**: `https://analytics.ramadhani.cloud` (or port `3000`)

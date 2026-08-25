@@ -14,7 +14,7 @@ www.{$SITE_DOMAIN:localhost} {
 # ------------------------------------------------------------------------------
 # Umami Analytics Subdomain (analytics.ramadhani.cloud / umami.ramadhani.cloud)
 # ------------------------------------------------------------------------------
-analytics.{$SITE_DOMAIN:localhost}, umami.{$SITE_DOMAIN:localhost} {
+analytics.{$SITE_DOMAIN:localhost} {
     reverse_proxy umami:3000
 }
 
@@ -56,7 +56,7 @@ analytics.{$SITE_DOMAIN:localhost}, umami.{$SITE_DOMAIN:localhost} {
     }
 
     # Umami Analytics Reverse Proxy (Subpath Fallback)
-    handle /umami/* {
+    handle_path /umami/* {
         reverse_proxy umami:3000
     }
 
