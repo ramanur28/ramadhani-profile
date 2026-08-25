@@ -1,16 +1,31 @@
 {
     # Global Caddy Options
     admin off
-    auto_https disable_redirects
+    email {$ACME_EMAIL:ramanur321@gmail.com}
 }
 
+# ------------------------------------------------------------------------------
+# Subdomain Redirection: www.ramadhani.cloud -> ramadhani.cloud
+# ------------------------------------------------------------------------------
+www.{$SITE_DOMAIN:localhost} {
+    redir https://{$SITE_DOMAIN:localhost}{uri} permanent
+}
+
+# ------------------------------------------------------------------------------
+# Umami Analytics Subdomain (analytics.ramadhani.cloud / umami.ramadhani.cloud)
+# ------------------------------------------------------------------------------
+analytics.{$SITE_DOMAIN:localhost}, umami.{$SITE_DOMAIN:localhost} {
+    reverse_proxy umami:3000
+}
+
+# ------------------------------------------------------------------------------
+# Primary Production Website
+# ------------------------------------------------------------------------------
 {$SITE_DOMAIN:localhost} {
     root * /srv
     encode zstd gzip
 
-    # --------------------------------------------------------------------------
     # Production Security & Performance Headers
-    # --------------------------------------------------------------------------
     header {
         # Strict Transport Security (HSTS)
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -24,9 +39,7 @@
         Permissions-Policy "camera=(), microphone=(), geolocation=()"
     }
 
-    # --------------------------------------------------------------------------
     # Immutable Caching for Fingerprinted / Hashed Assets (Astro)
-    # --------------------------------------------------------------------------
     @hashed {
         path /_astro/* /fonts/* /images/*
     }
@@ -34,9 +47,7 @@
         Cache-Control "public, max-age=31536000, immutable"
     }
 
-    # --------------------------------------------------------------------------
     # Fast Revalidation for HTML & Machine Directives
-    # --------------------------------------------------------------------------
     @html {
         path *.html / /llms.txt /robots.txt /sitemap-index.xml /rss.xml
     }
@@ -44,16 +55,12 @@
         Cache-Control "public, max-age=0, must-revalidate"
     }
 
-    # --------------------------------------------------------------------------
-    # Self-Hosted Umami Analytics Reverse Proxy (Subpath)
-    # --------------------------------------------------------------------------
+    # Umami Analytics Reverse Proxy (Subpath Fallback)
     handle /umami/* {
         reverse_proxy umami:3000
     }
 
-    # --------------------------------------------------------------------------
     # Static File Server & Fallbacks
-    # --------------------------------------------------------------------------
     handle {
         file_server
         try_files {path} {path}/ /index.html

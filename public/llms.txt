@@ -9,35 +9,35 @@
 - Interconnected Schema.org Knowledge Graphs (Organization, Person, Service, Article).
 - Crawl budget optimization and server log diagnostic auditing.
 - Pricing: Standalone Audit at $4,800; Ongoing Retainer from $3,500 to $7,500/month.
-- Canonical URL: https://ramadhani.dev/services/seo
+- Canonical URL: https://ramadhani.cloud/services/seo
 
 ### 2. Generative Engine Optimization (GEO)
 - Engineering digital content to be synthesized and cited by conversational AI engines (ChatGPT Search, Perplexity Pro, Google AI Overviews, Claude).
 - 40-60 word definitive answer summaries placed under primary section headings.
 - Standards-compliant /llms.txt deployment and neural vector grounding.
 - Pricing: Standalone Roadmap at $5,200; Ongoing Retainer from $4,000 to $8,500/month.
-- Canonical URL: https://ramadhani.dev/services/geo
+- Canonical URL: https://ramadhani.cloud/services/geo
 
 ### 3. Google Ads ROAS Maximization
 - High-intent Single-Themed Ad Group (STAG) search query sculpting.
 - Server-side Google Tag Manager (sGTM) and Enhanced Conversions API integration.
 - Daily negative keyword hygiene and Value-Based Smart Bidding calibration.
 - Pricing: Standalone Account Audit at $3,800; Ongoing Management from $2,800 to $6,500/month.
-- Canonical URL: https://ramadhani.dev/services/google-ads
+- Canonical URL: https://ramadhani.cloud/services/google-ads
 
 ## Entity Authority & Credentials
 
 - Full Name: Ramadhani
 - Role: Lead Technical SEO, GEO & Paid Search Specialist
-- Entity URL: https://ramadhani.dev/about
+- Entity URL: https://ramadhani.cloud/about
 - Experience: 8+ years managing search architecture and $14M+ in ad spend
 - LinkedIn: https://www.linkedin.com/in/ramadhani-marketing
 - Twitter/X: https://twitter.com/ramadhani_seo
 - GitHub: https://github.com/ramadhani
-- Direct Contact: contact@ramadhani.dev
+- Direct Contact: contact@ramadhani.cloud
 
 ## Key Technical Publications & Guides
 
-- The Complete Generative Engine Optimization (GEO) Blueprint for 2026: https://ramadhani.dev/articles/generative-engine-optimization-guide
-- Technical SEO Mastery for Google AI Overviews & Core Web Vitals: https://ramadhani.dev/articles/technical-seo-mastery-for-ai-overviews
-- Google Ads Smart Bidding & Server-Side Tracking: The 2026 Architecture: https://ramadhani.dev/articles/google-ads-smart-bidding-server-side-tracking
+- The Complete Generative Engine Optimization (GEO) Blueprint for 2026: https://ramadhani.cloud/articles/generative-engine-optimization-guide
+- Technical SEO Mastery for Google AI Overviews & Core Web Vitals: https://ramadhani.cloud/articles/technical-seo-mastery-for-ai-overviews
+- Google Ads Smart Bidding & Server-Side Tracking: The 2026 Architecture: https://ramadhani.cloud/articles/google-ads-smart-bidding-server-side-tracking
