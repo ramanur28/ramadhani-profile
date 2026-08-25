@@ -29,8 +29,8 @@ The production architecture is fully containerized with **Caddy** (serving pre-c
 
 ### Step 1: Clone Repository on VPS
 ```bash
-git clone https://github.com/your-username/ramadhani-personal-brand.git /opt/ramadhani
-cd /opt/ramadhani
+git clone https://github.com/your-username/ramadhani-personal-brand.git /var/www/ramadhani
+cd /var/www/ramadhani
 ```
 
 ### Step 2: Configure Environment Variables
@@ -59,11 +59,11 @@ When an editor publishes or updates an MDX article via Decap CMS at `/admin`, De
 
 To trigger an automatic rebuild without needing a complex CI pipeline, set up a simple lightweight webhook handler on your VPS (e.g., using `adnanh/webhook` or a 15-line Node.js script):
 
-### Webhook Deploy Script (`/opt/ramadhani/deploy.sh`)
+### Webhook Deploy Script (`/var/www/ramadhani/deploy.sh`)
 ```bash
 #!/bin/bash
 set -e
-cd /opt/ramadhani
+cd /var/www/ramadhani
 git pull origin main
 docker compose -f docker-compose.prod.yml build web
 docker compose -f docker-compose.prod.yml up -d --no-deps web
@@ -71,12 +71,12 @@ echo "Production build successfully refreshed at $(date)"
 ```
 Make the script executable:
 ```bash
-chmod +x /opt/ramadhani/deploy.sh
+chmod +x /var/www/ramadhani/deploy.sh
 ```
 
 ### GitHub Webhook Setup
 1. In your GitHub repository, go to **Settings > Webhooks > Add webhook**.
-2. **Payload URL**: `https://ramadhani.dev/api/webhook-deploy` (or your webhook server endpoint).
+2. **Payload URL**: `https://ramadhani.cloud/api/webhook-deploy` (or your webhook server endpoint).
 3. **Content type**: `application/json`.
 4. **Secret**: Value of `REBUILD_WEBHOOK_SECRET` in your `.env`.
 5. **Events**: "Just the push event" on `main`.

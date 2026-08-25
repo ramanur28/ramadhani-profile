@@ -21,13 +21,13 @@ RUN npm run build
 # Stage 2: Minimal Caddy Production Server
 FROM caddy:2-alpine AS runner
 
-WORKDIR /srv
+WORKDIR /var/www/ramadhani
 
 # Copy custom Caddy configuration
 COPY Caddyfile /etc/caddy/Caddyfile
 
 # Copy compiled static assets from builder stage
-COPY --from=builder /app/dist /srv
+COPY --from=builder /app/dist /var/www/ramadhani
 
 # Expose HTTP and HTTPS ports
 EXPOSE 80 443 443/udp

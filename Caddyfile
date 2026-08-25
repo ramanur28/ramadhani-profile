@@ -22,7 +22,7 @@ analytics.{$SITE_DOMAIN:localhost}, umami.{$SITE_DOMAIN:localhost} {
 # Primary Production Website
 # ------------------------------------------------------------------------------
 {$SITE_DOMAIN:localhost} {
-    root * /srv
+    root * /var/www/ramadhani
     encode zstd gzip
 
     # Production Security & Performance Headers
